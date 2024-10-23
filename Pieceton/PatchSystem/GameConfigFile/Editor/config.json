@@ -1,0 +1,21 @@
+﻿{
+  "issue": "None",
+  "issue_type": [{ "0": "None" }, { "1": "GameVersion" }],
+
+  "service": "None",
+  "service_type": [{ "0": "None" }, { "1": "SoftRelease" }],
+
+  "fixed_game_server": "",
+
+  "auth_server": {
+    "Dev": "http://dev-authserver.koreacentral.cloudapp.azure.com:5000",
+    "Dev_QA": "http://qa-authserver-01.koreacentral.cloudapp.azure.com:5000",
+    "Staging": "https://staging.snackworld.xthplanet.com",
+    "IOS_TEST": "https://inspection.snackworld.xthplanet.com",
+    "Live": "https://inspection.snackworld.xthplanet.com"
+  },
+
+  "inspection_server": {
+    "Dev": ""
+  }
+}

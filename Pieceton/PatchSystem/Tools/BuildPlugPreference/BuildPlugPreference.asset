@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a37636c63920bf64086b596e8539ff77, type: 3}
+  m_Name: BuildPlugPreference
+  m_EditorClassIdentifier: 
+  CompanyName: Daybrix
+  ProductName: D1
+  PackageName:
+  - com.daybrix.test.d1
+  - com.daybrix.test.d1
+  gameVersion:
+  - 0.0.1
+  - 0.0.1
+  versionCode:
+  - 1
+  - 1
+  keystoreName: daybrix_test.keystore
+  keystorePass: daybrix_test
+  keyaliasName: daybrix_test
+  keyaliasPass: daybrix_test
+  uploadUrl:
+  - upload-web.nas.nefficient.com
+  - sftp://192.168.0.100/
+  - 
+  uploadId:
+  - cdn-getamped
+  - dayadmin
+  - 
+  uploadPw:
+  - cdn-getamped#adm
+  - Epdlqmflrtm6^^
+  - 
+  downloadBaseUrl:
+  - https://daybrix.direct.quickconnect.to:5901/
+  - https://daybrix.direct.quickconnect.to:5901/
+  - http://rapker.iptime.org/
+  - http://rapker.iptime.org/
+  installedPythonPath:
+  - C:/Users/OKIMYJ/AppData/Local/Programs/Python/Python312/python.exe
+  - python3

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c75bdaae77106243bc8ea6ea0f20c6b, type: 3}
+  m_Name: PBPlug_devqa
+  m_EditorClassIdentifier: 
+  releaseType: 1
+  platform: 0
+  aos_BuildSystem: 1
+  aos_TextureSubtarget: 4
+  exportAndroidProject: 0
+  androidScriptBackend: 1
+  iosEnterpriseCert: 
+  overrideGameVersion: 0
+  GameVersion:
+  - 1.0.0
+  - 1.0.0
+  VersionCode:
+  - 3
+  - 1
+  UseSvnRevision: 0000
+  Symbols:
+  - list:
+    - USE_SPINE_2D
+    - ENABLE_CHEAT
+    - USE_DATATABLE_CLIENT
+    - SHOW_FRAME_RATE
+  - list: []
+  ios_AppDisplayName: rebase
+  uploadProtocol: 010000000000000001000000000000000000000000000000
+  useBackup: 000000000000
+  executeFlag: 0
+  buildFlag: 6
+  bundleCheckFlag: 1
+  ios_certificationFlag: 0
+  preProcessors:
+  - script: {fileID: 11500000, guid: f4ea9716c250eb543a7c3dd2ae3af8b6, type: 3}
+    methodName: CheckAndSetAssetBundleFolder_All
+  - script: {fileID: 11500000, guid: c7b2124e98ab01345a59ac40b0979625, type: 3}
+    methodName: Generate
