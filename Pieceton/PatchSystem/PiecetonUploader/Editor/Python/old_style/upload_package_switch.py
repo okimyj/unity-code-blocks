@@ -279,8 +279,8 @@ def RetrySendFile(srcFullpath, dstFullPath) :
         
         try:
             g_session.storbinary('STOR '+ dstFullPath, fd)      # send the file
-        except:
-            print("fail")
+        except BrokenPipeError as e:
+            print("fail : " + e)
         else:
             isSuccess = True
             break
