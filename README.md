@@ -17,3 +17,10 @@
 - 올라가있는 appBundle 버전 코드와 빌드 apk의 버전 코드 확인
 - 테스트 할 계정으로 내부 테스트 프로그램에 참여 했는지 (개별 링크)확인
 - 테스트 및 출시 - 설정 - 고급 설정 에서 앱 이용 가능 여부가 출시 됨으로 되어있는지 확인.
+
+##3. Unity Android 빌드 시 directory is not writable 오류
+Failed to install the following SDK components:
+build-tools;30.0.3 Android SDK Build-Tools 30.0.3
+The SDK directory is not writable (C:\Program Files\Unity\Hub\Editor\2022.3.19f1\Editor\Data\PlaybackEngines\AndroidPlayer\SDK)
+
+시스템 환경변수에 JAVA_OPTIONS : -Xmx512M 추가
