@@ -24,3 +24,18 @@ build-tools;30.0.3 Android SDK Build-Tools 30.0.3
 The SDK directory is not writable (C:\Program Files\Unity\Hub\Editor\2022.3.19f1\Editor\Data\PlaybackEngines\AndroidPlayer\SDK)
 
 시스템 환경변수에 JAVA_OPTIONS : -Xmx512M 추가
+
+##3. GooglePlay 로그인 시도 시 com.google.android.gms.common.api.ApiException: 10 이런 비슷한 오류 뜨는 경우.
+
+- FingerPrint가 일치하지 않을 때 발생.
+  작성 시점의 경우는 build 할 때 사용하는 인증서의 SHA-1 는 등록 해서 빌드머신에서 바로 apk를 뽑아서 실행 할 때는 동작했지만
+  Google Play Console에 aab를 올릴 때 서명되는 앱 서명 키를 등록하지 않았었기 때문에
+  Google Play Console의 내부테스트를 이용해 실행 할 때는 정상 동작하지 않았던 것.
+  해결 방법
+
+1. Google Cloud Console - API 및 서비스 접속.
+2. 사용자 인증 정보 - 사용자 인증 정보 만들기 - OAuth 클라이언트 ID 생성
+3. 애플리케이션 유형 : 안드로이드, Google Play Console 에 있는 앱 서명 인증키 SHA-1 등록.
+
+Firebase를 사용 한다면 Firebase Console에도 등록 해야한다.
+Firebase Console - 프로젝트 설정 - 디지털 지문 추가
