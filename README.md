@@ -39,3 +39,7 @@ The SDK directory is not writable (C:\Program Files\Unity\Hub\Editor\2022.3.19f1
 
 Firebase를 사용 한다면 Firebase Console에도 등록 해야한다.
 Firebase Console - 프로젝트 설정 - 디지털 지문 추가
+
+##4. Rendering Debugger
+https://docs.unity3d.com/kr/Packages/com.unity.render-pipelines.universal%4014.0/manual/features/rendering-debugger.html
+UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
