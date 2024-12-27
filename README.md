@@ -25,6 +25,14 @@ The SDK directory is not writable (C:\Program Files\Unity\Hub\Editor\2022.3.19f1
 
 시스템 환경변수에 JAVA_OPTIONS : -Xmx512M 추가
 
+- 권한 문제 해결
+  SDK 디렉토리에 쓰기 권한을 부여하지 못하는 경우, Unity 실행 권한을 조정합니다.
+
+해결 방법:
+Unity 실행 파일(Unity.exe)을 관리자 권한으로 실행합니다.
+문제가 해결되지 않으면 명령 프롬프트(관리자 권한)에서 다음 명령을 실행하여 SDK 폴더에 권한을 부여합니다:
+icacls "C:\Program Files\Unity\Hub\Editor\2022.3.13f1\Editor\Data\PlaybackEngines\AndroidPlayer\SDK" /grant Users:F /T
+
 ##3. GooglePlay 로그인 시도 시 com.google.android.gms.common.api.ApiException: 10 이런 비슷한 오류 뜨는 경우.
 
 - FingerPrint가 일치하지 않을 때 발생.
