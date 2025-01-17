@@ -51,3 +51,8 @@ Firebase Console - 프로젝트 설정 - 디지털 지문 추가
 ##4. Rendering Debugger
 https://docs.unity3d.com/kr/Packages/com.unity.render-pipelines.universal%4014.0/manual/features/rendering-debugger.html
 UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
+
+##5. Google Console .der 인증서로 keystore 만들기
+cmd 관리자 권한
+keytool 보통의 경로 : C:\Program Files\Unity\Hub\Editor\2019.4.8f1\Editor\Data\PlaybackEngines\AndroidPlayer\OpenJDK\bin
+keytool.exe -importcert -file upload_cert.der -keystore <keystorefile>
