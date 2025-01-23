@@ -1,5 +1,7 @@
-#Build 자동화 관련 세팅 및 메모
-##1. Slack webhook shell script
+# Build 자동화 관련 세팅 및 메모
+
+## 1. Slack webhook shell script
+
 https://slack.com/apps/A0F7XDUAZ-incoming-webhooks
 
 ```
