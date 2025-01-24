@@ -18,3 +18,6 @@ MESSAGE="[${JOB_NAME} 빌드 시작] 앱 실링 : ${APPSEALING_STATUS}, 자동 �
 
 curl -X POST --data-urlencode "payload={\"channel\": \"#build_notification_dev\", \"username\": \"webhookbot\", \"text\": \"${MESSAGE}\", \"icon_emoji\": \":building_construction:\"}" https://hooks.slack.com/services/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
 ```
+
+emoji 코드 참조
+https://www.webfx.com/tools/emoji-cheat-sheet/
