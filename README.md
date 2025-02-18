@@ -56,3 +56,8 @@ UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
 cmd 관리자 권한
 keytool 보통의 경로 : C:\Program Files\Unity\Hub\Editor\2019.4.8f1\Editor\Data\PlaybackEngines\AndroidPlayer\OpenJDK\bin
 keytool.exe -importcert -file upload_cert.der -keystore <keystorefile>
+
+##6. turkey test
+시스템 언어가 터키어인 경우 Directory, Path 등에서 오작동 할 수 있다.
+i 가 ı 로 바뀜.. 뭔가 경로를 찾는다거나 하는 경우에는
+ToLower/ToUpper 대신 ToLowerInvariant, ToUpperInvariant 사용할 것.
