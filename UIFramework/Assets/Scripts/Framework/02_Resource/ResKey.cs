@@ -13,7 +13,7 @@ namespace UIFramework.Resource
         public string BundleName { get; private set; }
         public string BaseDir { get; private set; }
         public string AssetFileExt { get; private set; }
-        public ResKey(bool usePackage, int id, string bundleName, string baseDir, string assetFileExt) 
+        public ResKey(bool usePackage, int id, string baseDir, string bundleName, string assetFileExt = "") 
         {
             UsePackage = usePackage;
             ID = id;
@@ -76,6 +76,6 @@ namespace UIFramework.Resource
 
     public class ResourceKey
     {
-        
+        public static ResKey BASIC_WINDOW = new ResKey(true, 2, "BasicWindow/", "");
     }
 }

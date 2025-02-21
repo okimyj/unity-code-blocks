@@ -4,7 +4,7 @@ using UIFramework.Core;
 using UnityEngine;
 namespace UIFramework.Window
 {
-    public partial class WindowManager : SingletonMonoDontDestroyBehaviour<WindowManager>
+    public partial class WindowDisplayer : SingletonMonoDontDestroyBehaviour<WindowDisplayer>
     {
         private bool isInitialized = false;
         public void Initialize()
@@ -13,12 +13,6 @@ namespace UIFramework.Window
                 return;
             isInitialized = true;
             gameObject.layer = LayerMask.NameToLayer("UI");
-        }
-
-
-        public void PrecacheWindow()
-        {
-
         }
     }
 

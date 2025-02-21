@@ -7,12 +7,12 @@ namespace UIFramework.Resource
         public void Initialize()
         {
 
-        }    
-        public T Load<T>(ResKey key, string assetName) where T : UnityEngine.Object
+        }
+        public T LoadAsset<T>(ResKey key, string assetName) where T : UnityEngine.Object
         {
             if (string.IsNullOrEmpty(assetName))
             {
-                GameLogger.LogError("[ResourceManager]::Load() - AssetName is empty.");
+                GameLogger.LogError("[ResourceManager]::LoadAsset() - AssetName is empty.");
                 return null;
             }
             if (key.UsePackage)
@@ -21,7 +21,7 @@ namespace UIFramework.Resource
                 var res = Resources.Load<T>(path);
                 if(res == null)
                 {
-                    GameLogger.LogError($"[ResourceManager]::Load() - Failed. path : {path}");
+                    GameLogger.LogError($"[ResourceManager]::LoadAsset() - Failed. path : {path}");
                 }
                 return res;
             }
