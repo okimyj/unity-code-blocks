@@ -26,7 +26,7 @@ namespace UIFramework.Core
                             if (objs.Length > 0)
                                 _instance = objs[0];
                             if (objs.Length > 1)
-                                Logger.LogError("There is more than one " + typeof(T).Name + " in the scene.");
+                                GameLogger.LogError("There is more than one " + typeof(T).Name + " in the scene.");
 
                             if (_instance == null)
                             {

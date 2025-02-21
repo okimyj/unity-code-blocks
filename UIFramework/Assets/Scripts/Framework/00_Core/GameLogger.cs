@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UIFramework.Core
 {
-    public class Logger
+    public class GameLogger
     {
 #if UNITY_EDITOR
         public static bool ENABLE_LOG = true;
