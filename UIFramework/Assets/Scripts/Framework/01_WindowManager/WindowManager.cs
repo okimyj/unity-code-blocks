@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UIFramework.Core;
@@ -14,9 +15,7 @@ namespace UIFramework.Window
             isInitialized = true;
             gameObject.layer = LayerMask.NameToLayer("UI");
         }
-
-
-        public void PrecacheWindow()
+        public void ShowWindow(WinKey key, Action closeCallback)
         {
 
         }

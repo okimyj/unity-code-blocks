@@ -6,13 +6,12 @@ namespace UIFramework.Window
 {
     public partial class WindowDisplayer : SingletonMonoDontDestroyBehaviour<WindowDisplayer>
     {
-        private bool isInitialized = false;
-        public void Initialize()
+        private Transform holder;
+        private Transform topHolder;
+        public WindowDisplayer(Transform _holder, Transform _topHolder)
         {
-            if (isInitialized)
-                return;
-            isInitialized = true;
-            gameObject.layer = LayerMask.NameToLayer("UI");
+            holder = _holder;
+            topHolder = _topHolder;
         }
     }
 
