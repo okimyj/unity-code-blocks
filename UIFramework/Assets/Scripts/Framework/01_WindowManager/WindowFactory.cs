@@ -42,19 +42,19 @@ namespace UIFramework.Window
         }
         public void PrecacheWindow(WinKey winKey)
         {
-            if (!this.allCachedWindow.ContainsKey(winKey.ID))
+            if (!allCachedWindow.ContainsKey(winKey.ID))
             {
                 WindowBase window = CreateWindow(winKey, this.holder);
-                this.allCachedWindow.Add(winKey.ID, window);
+                allCachedWindow.Add(winKey.ID, window);
             }
         }
 
         public void RemoveCachedWindow(WinKey winKey)
         {
-            if (this.allCachedWindow.ContainsKey(winKey.ID))
+            if (allCachedWindow.ContainsKey(winKey.ID))
             {
                 GameObject.Destroy(allCachedWindow[winKey.ID].gameObject);
-                this.allCachedWindow.Remove(winKey.ID);
+                allCachedWindow.Remove(winKey.ID);
             }
         }
         public void RemoveNotShowingWindow(Func<WinKey, bool> isShowing)
@@ -77,9 +77,9 @@ namespace UIFramework.Window
 
         public WindowBase RentWindow(WinKey winKey, Transform parent)
         {
-            if (this.allCachedWindow.ContainsKey(winKey.ID))
+            if (allCachedWindow.ContainsKey(winKey.ID))
             {
-                WindowBase w = this.allCachedWindow[winKey.ID];
+                WindowBase w = allCachedWindow[winKey.ID];
                 if (w != null)
                 {
                     w.transform.SetParent(parent);
@@ -88,10 +88,10 @@ namespace UIFramework.Window
             }
             else
             {
-                WindowBase w = CreateWindow(winKey, this.holder);
+                WindowBase w = CreateWindow(winKey, holder);
                 if (w != null)
                 {
-                    this.allCachedWindow.Add(winKey.ID, w);
+                    allCachedWindow.Add(winKey.ID, w);
                     w.transform.SetParent(parent);
                     return w;
                 }
@@ -103,14 +103,14 @@ namespace UIFramework.Window
         public void ReturnWindow(WindowBase window)
         {
             window.SetCloseCallback(null);
-            window.transform.SetParent(this.holder);
+            window.transform.SetParent(holder);
         }
 
         public WindowBase GetWindow(WinKey winKey)
         {
-            if (this.allCachedWindow.ContainsKey(winKey.ID))
+            if (allCachedWindow.ContainsKey(winKey.ID))
             {
-                return this.allCachedWindow[winKey.ID];
+                return allCachedWindow[winKey.ID];
             }
             return null;
         }

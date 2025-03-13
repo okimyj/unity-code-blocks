@@ -27,6 +27,15 @@ namespace UIFramework.Window
             windowDisplayer.HideWindow(key);
         }
         
+        public void PrecacheWindow(WinKey winKey)
+        {
+            windowFactory.PrecacheWindow(winKey);
+        }
+        public void RemoveCachedWindow(WinKey winKey)
+        {
+            windowDisplayer.HideWindow(winKey);
+            windowFactory.RemoveCachedWindow(winKey);
+        }
     }
 
 }
