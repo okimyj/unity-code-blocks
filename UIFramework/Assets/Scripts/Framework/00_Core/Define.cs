@@ -1,7 +1,3 @@
-using System;
-using UnityEngine;
-
-
 namespace UIFramework.Core
 {
     public class CONSTANTS

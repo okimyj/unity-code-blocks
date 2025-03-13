@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UIFramework.Core;
-using UIFramework.Window;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace UIFramework.Window
 {
     public partial class WindowManager : SingletonMonoDontDestroyBehaviour<WindowManager>

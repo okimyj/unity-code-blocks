@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UIFramework.Resource;
+
 namespace UIFramework.Core
 {
     public class WinKey : IEquatable<WinKey>

@@ -1,5 +1,6 @@
 using UIFramework.Core;
 using UnityEngine;
+
 namespace UIFramework.Resource
 {
     public class ResourceManager : SingletonMonoDontDestroyBehaviour<ResourceManager>
