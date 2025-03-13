@@ -44,7 +44,7 @@ namespace UIFramework.Window
 
             showingWindowMap[winKey.ID] = window;
 
-            this.OpenWindow(window, openWinParam);
+            OpenWindow(window, openWinParam);
 
             return window;
         }

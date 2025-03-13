@@ -40,14 +40,14 @@ namespace UIFramework.Core
         {
             if (obj is WinKey)
             {
-                return this.Equals((WinKey)obj);
+                return Equals((WinKey)obj);
             }
             return false;
         }
 
         public bool Equals(WinKey other)
         {
-            return this.ID == other.ID;
+            return ID == other.ID;
         }
 
         public static bool operator ==(WinKey lhs, WinKey rhs)

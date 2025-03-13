@@ -63,24 +63,19 @@ namespace UIFramework.Window
         private Canvas MakeRootCanvas(Transform parent)
         {
             var goCanvas = new GameObject(CANVAS_NAME);
-            var canvas = goCanvas.AddComponent<Canvas>();
-
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-
-            CanvasScaler canvas_scaler = goCanvas.AddComponent<CanvasScaler>();
-
-            canvas_scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            canvas_scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
-            canvas_scaler.referenceResolution = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT);
-
-            canvas_scaler.matchWidthOrHeight = 1.0f;
-
-            GraphicRaycaster raycaster = goCanvas.AddComponent<GraphicRaycaster>();
-
+            goCanvas.AddComponent<GraphicRaycaster>();
+            goCanvas.transform.SetParent(parent);
             goCanvas.transform.localPosition = Vector3.zero;
             goCanvas.layer = LayerMask.NameToLayer(CONSTANTS.LAYER_UI);
 
-            goCanvas.transform.SetParent(parent);
+            var canvas = goCanvas.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+            CanvasScaler canvas_scaler = goCanvas.AddComponent<CanvasScaler>();
+            canvas_scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            canvas_scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
+            canvas_scaler.referenceResolution = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT);
+            canvas_scaler.matchWidthOrHeight = 1.0f;
 
             return canvas;
         }

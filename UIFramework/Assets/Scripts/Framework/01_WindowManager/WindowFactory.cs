@@ -33,11 +33,11 @@ namespace UIFramework.Window
                     return window;
                 }
 
-                GameLogger.LogError("WindowInGameFactory.CreateWindow -- Not Found WindowBase Component : " + winKey.PrefabName);
+                GameLogger.LogError("WindowFactory.CreateWindow -- Not Found WindowBase Component : " + winKey.PrefabName);
                 return null;
             }
 
-            GameLogger.LogError("WindowInGameFactory.CreateWindow -- Could not load a gameobject  : " + winKey.PrefabName);
+            GameLogger.LogError("WindowFactory.CreateWindow -- Could not load a gameobject  : " + winKey.PrefabName);
             return null;
         }
         public void PrecacheWindow(WinKey winKey)
@@ -45,7 +45,7 @@ namespace UIFramework.Window
             if (!allCachedWindow.ContainsKey(winKey.ID))
             {
                 WindowBase window = CreateWindow(winKey, this.holder);
-                allCachedWindow.Add(winKey.ID, window);
+                allCachedWindow[winKey.ID] = window;
             }
         }
 
@@ -77,27 +77,17 @@ namespace UIFramework.Window
 
         public WindowBase RentWindow(WinKey winKey, Transform parent)
         {
-            if (allCachedWindow.ContainsKey(winKey.ID))
+            if (!allCachedWindow.TryGetValue(winKey.ID, out var window))
             {
-                WindowBase w = allCachedWindow[winKey.ID];
-                if (w != null)
-                {
-                    w.transform.SetParent(parent);
-                }
-                return w;
+                window = CreateWindow(winKey, holder);
             }
-            else
+            if(window != null)
             {
-                WindowBase w = CreateWindow(winKey, holder);
-                if (w != null)
-                {
-                    allCachedWindow.Add(winKey.ID, w);
-                    w.transform.SetParent(parent);
-                    return w;
-                }
+                allCachedWindow[winKey.ID] = window;
+                window.transform.SetParent(parent);
             }
 
-            return null;
+            return window;
         }
 
         public void ReturnWindow(WindowBase window)
@@ -108,9 +98,9 @@ namespace UIFramework.Window
 
         public WindowBase GetWindow(WinKey winKey)
         {
-            if (allCachedWindow.ContainsKey(winKey.ID))
+            if (allCachedWindow.TryGetValue(winKey.ID, out var window))
             {
-                return allCachedWindow[winKey.ID];
+                return window;
             }
             return null;
         }
