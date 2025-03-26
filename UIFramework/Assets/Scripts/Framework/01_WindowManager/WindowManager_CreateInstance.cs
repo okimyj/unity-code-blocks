@@ -63,13 +63,13 @@ namespace UIFramework.Window
         private Canvas MakeRootCanvas(Transform parent)
         {
             var goCanvas = new GameObject(CANVAS_NAME);
+            var canvas = goCanvas.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
             goCanvas.AddComponent<GraphicRaycaster>();
             goCanvas.transform.SetParent(parent);
             goCanvas.transform.localPosition = Vector3.zero;
             goCanvas.layer = LayerMask.NameToLayer(CONSTANTS.LAYER_UI);
-
-            var canvas = goCanvas.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
             CanvasScaler canvas_scaler = goCanvas.AddComponent<CanvasScaler>();
             canvas_scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;

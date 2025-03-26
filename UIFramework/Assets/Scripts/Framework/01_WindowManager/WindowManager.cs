@@ -8,7 +8,7 @@ namespace UIFramework.Window
         private bool isInitialized = false;
         private WindowDisplayer windowDisplayer;
         private WindowFactory windowFactory;
-        public void Initialize()
+        private void Initialize()
         {
             if (isInitialized)
                 return;

@@ -16,7 +16,6 @@ public class WindowBase : MonoBehaviour
     public virtual void OnOpenWindow(object openWinParam) { }
     public virtual void OnCloseWindow() { }
 
-
     public void SetCloseCallback(Callback callback)
     {
         closeCallback = callback;
