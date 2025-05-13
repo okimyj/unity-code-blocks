@@ -19,6 +19,7 @@
 - 테스트 및 출시 - 설정 - 고급 설정 에서 앱 이용 가능 여부가 출시 됨으로 되어있는지 확인.
 
 ## 3. Unity Android 빌드 시 directory is not writable 오류
+
 Failed to install the following SDK components:
 build-tools;30.0.3 Android SDK Build-Tools 30.0.3
 The SDK directory is not writable (C:\Program Files\Unity\Hub\Editor\2022.3.19f1\Editor\Data\PlaybackEngines\AndroidPlayer\SDK)
@@ -49,15 +50,32 @@ Firebase를 사용 한다면 Firebase Console에도 등록 해야한다.
 Firebase Console - 프로젝트 설정 - 디지털 지문 추가
 
 ## 5. Rendering Debugger
+
 https://docs.unity3d.com/kr/Packages/com.unity.render-pipelines.universal%4014.0/manual/features/rendering-debugger.html
 UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
 
 ## 6. Google Console .der 인증서로 keystore 만들기
+
 cmd 관리자 권한
 keytool 보통의 경로 : C:\Program Files\Unity\Hub\Editor\2019.4.8f1\Editor\Data\PlaybackEngines\AndroidPlayer\OpenJDK\bin
 keytool.exe -importcert -file upload_cert.der -keystore <keystorefile>
 
 ## 7. turkey test
+
 시스템 언어가 터키어인 경우 Directory, Path 등에서 오작동 할 수 있다.
 i 가 ı 로 바뀜.. 뭔가 경로를 찾는다거나 하는 경우에는
 ToLower/ToUpper 대신 ToLowerInvariant, ToUpperInvariant 사용할 것.
+
+## 8. git stash 복구
+
+### 삭제한 stash list 가져오기
+
+`git fsck --unreachable | grep commit | cut -d ' ' -f3 | xargs git log --merges --no-walk`
+
+### stash의 파일 변경 내역 불러오기
+
+`git stash show -p <commit hash>`
+
+### stash apply
+
+`git stash apply <commit hash>`
