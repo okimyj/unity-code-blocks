@@ -15,36 +15,36 @@ namespace UIFramework.Window
         private readonly string WINDOW_NAME_TOP_HOLDER = "[WINDOWS_TOP_HOLDER]";
         private readonly string CANVAS_NAME = "[UICanvas]";
 
-        private GameObject rootWindow;
-        private GameObject holderInactiveWindows;
-        private GameObject holderActiveWindows;
-        private GameObject holderActiveTopWindows;
+        private GameObject m_rootWindow;
+        private GameObject m_holderInactiveWindows;
+        private GameObject m_holderActiveWindows;
+        private GameObject m_holderActiveTopWindows;
         public static void CreateInstance()
         {
-            var _windowManager = WindowManager.Instance;
-            _windowManager.CreateRootWindow();
-            _windowManager.Initialize();
+            var windowManager = WindowManager.Instance;
+            windowManager.CreateRootWindow();
+            windowManager.Initialize();
         }
 
         private void CreateRootWindow()
         {
-            if (rootWindow != null)
+            if (m_rootWindow != null)
                 return;
-            rootWindow = new GameObject(WINDOW_NAME_ROOT);
-            rootWindow.layer = LayerMask.NameToLayer(CONSTANTS.LAYER_UI);
+            m_rootWindow = new GameObject(WINDOW_NAME_ROOT);
+            m_rootWindow.layer = LayerMask.NameToLayer(CONSTANTS.LAYER_UI);
 
-            var rootWindowTr = rootWindow.transform;
+            var rootWindowTr = m_rootWindow.transform;
             rootWindowTr.localPosition = Vector3.zero;
             rootWindowTr.localScale = Vector3.one;
             rootWindowTr.localRotation = Quaternion.identity;
             rootWindowTr.SetParent(transform);
 
-            var canvas = MakeRootCanvas(rootWindowTr);
+            Canvas canvas = MakeRootCanvas(rootWindowTr);
             canvas.sortingOrder = 1;
 
-            holderInactiveWindows = CreateHolder(WINDOW_NAME_CACHE_ROOT, canvas.transform);
-            holderActiveWindows = CreateHolder(WINDOW_NAME_HOLDER, canvas.transform);
-            holderActiveTopWindows = CreateHolder(WINDOW_NAME_TOP_HOLDER, canvas.transform);
+            m_holderInactiveWindows = CreateHolder(WINDOW_NAME_CACHE_ROOT, canvas.transform);
+            m_holderActiveWindows = CreateHolder(WINDOW_NAME_HOLDER, canvas.transform);
+            m_holderActiveTopWindows = CreateHolder(WINDOW_NAME_TOP_HOLDER, canvas.transform);
         }
 
         private GameObject CreateHolder(string holderName, Transform parent)
@@ -71,7 +71,7 @@ namespace UIFramework.Window
             goCanvas.transform.localPosition = Vector3.zero;
             goCanvas.layer = LayerMask.NameToLayer(CONSTANTS.LAYER_UI);
 
-            CanvasScaler canvas_scaler = goCanvas.AddComponent<CanvasScaler>();
+            var canvas_scaler = goCanvas.AddComponent<CanvasScaler>();
             canvas_scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             canvas_scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
             canvas_scaler.referenceResolution = new Vector2(SCREEN_WIDTH, SCREEN_HEIGHT);

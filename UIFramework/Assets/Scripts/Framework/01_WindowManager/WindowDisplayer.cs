@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UIFramework.Core;
 using UnityEngine;
 
@@ -6,22 +6,22 @@ namespace UIFramework.Window
 {
     public partial class WindowDisplayer : SingletonMonoDontDestroyBehaviour<WindowDisplayer>
     {
-        private Transform holder;
-        private Transform topHolder;
-        private Dictionary<int, WindowBase> showingWindowMap = new Dictionary<int, WindowBase>();
-        private WindowFactory windowFactory;
+        private Transform m_holder;
+        private Transform m_topHolder;
+        private Dictionary<int, WindowBase> m_showingWindowMap = new Dictionary<int, WindowBase>();
+        private WindowFactory m_windowFactory;
 
-        public WindowDisplayer(WindowFactory _windowFactory, Transform _holder, Transform _topHolder)
+        public WindowDisplayer(WindowFactory windowFactory, Transform holder, Transform topHolder)
         {
-            windowFactory = _windowFactory;
-            holder = _holder;
-            topHolder = _topHolder;
+            m_windowFactory = windowFactory;
+            m_holder = holder;
+            m_topHolder = topHolder;
         }
         public WindowBase ShowWindow(WinKey winKey, Callback closeCallback, object openWinParam)
         {
-            Transform parent = winKey.IsTopWindow ? topHolder : holder;
+            var parent = winKey.IsTopWindow ? m_topHolder : m_holder;
+            int showIdx = FindShowingWindowIndex(parent, winKey.Priority);
             WindowBase showingWindow = FindShowingWindow(winKey);
-            var showIdx = FindShowingWindowIndex(parent, winKey.Priority);
             if (showingWindow != null)
             {
                 if (showIdx >= 0)
@@ -36,7 +36,7 @@ namespace UIFramework.Window
             }
 
             
-            WindowBase window = windowFactory.RentWindow(winKey, parent);
+            WindowBase window = m_windowFactory.RentWindow(winKey, parent);
             if (window == null)
             {
                 GameLogger.LogError($"WindowDisplayer.ShowWindow() : window is null. winKey : {winKey.ID}");
@@ -54,7 +54,7 @@ namespace UIFramework.Window
                 window.transform.SetAsLastSibling();
             }
 
-            showingWindowMap[winKey.ID] = window;
+            m_showingWindowMap[winKey.ID] = window;
 
             OpenWindow(window, openWinParam);
 
@@ -62,12 +62,12 @@ namespace UIFramework.Window
         }
         public void HideWindow(WinKey winKey)
         {
-            var targetWindow = FindShowingWindow(winKey);
+            WindowBase targetWindow = FindShowingWindow(winKey);
             if(targetWindow != null)
             {
                 CloseWindow(targetWindow);
-                showingWindowMap.Remove(winKey.ID);
-                windowFactory.ReturnWindow(targetWindow);
+                m_showingWindowMap.Remove(winKey.ID);
+                m_windowFactory.ReturnWindow(targetWindow);
             }
         }
 
@@ -84,7 +84,7 @@ namespace UIFramework.Window
         }
         public WindowBase FindShowingWindow(WinKey winKey)
         {
-            if (showingWindowMap.TryGetValue(winKey.ID, out var window))
+            if (m_showingWindowMap.TryGetValue(winKey.ID, out var window))
             {
                 return window;
             }

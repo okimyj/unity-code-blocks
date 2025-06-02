@@ -6,7 +6,7 @@ public class WindowBase : MonoBehaviour
 { 
     public WinKey WinKey { get; protected set; }
     protected WindowManager windowManager;
-    private Callback closeCallback;
+    private Callback m_closeCallback;
 
     public virtual void InitWindow(WinKey _winKey, WindowManager _windowManager)
     {
@@ -18,12 +18,12 @@ public class WindowBase : MonoBehaviour
 
     public void SetCloseCallback(Callback callback)
     {
-        closeCallback = callback;
+        m_closeCallback = callback;
     }
     public void CallAndClearCloseCallback()
     {
-        closeCallback?.Invoke();
-        closeCallback = null;
+        m_closeCallback?.Invoke();
+        m_closeCallback = null;
     }
     
     protected void Close()
