@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UIFramework.Core;
 using UnityEngine;
 
@@ -19,28 +19,40 @@ namespace UIFramework.Window
         }
         public WindowBase ShowWindow(WinKey winKey, Callback closeCallback, object openWinParam)
         {
+            Transform parent = winKey.IsTopWindow ? topHolder : holder;
             WindowBase showingWindow = FindShowingWindow(winKey);
+            var showIdx = FindShowingWindowIndex(parent, winKey.Priority);
             if (showingWindow != null)
             {
+                if (showIdx >= 0)
+                {
+                    // 이미 보여지고 있는 ui이기 때문에 본인 index 빼야됨.
+                    showIdx -= 1;
+                    showingWindow.transform.SetSiblingIndex(showIdx);
+                }
+                else
+                    showingWindow.transform.SetAsLastSibling();
                 return showingWindow;
             }
 
-            Transform parent = winKey.IsTopWindow ? topHolder : holder;
-
-            var showIdx = FindShowingWindowIndex(parent, winKey.Priority);
+            
             WindowBase window = windowFactory.RentWindow(winKey, parent);
             if (window == null)
             {
-                GameLogger.LogError("WindowDisplayer.ShowWindow() : window is null");
+                GameLogger.LogError($"WindowDisplayer.ShowWindow() : window is null. winKey : {winKey.ID}");
                 return null;
             }
 
             window.SetCloseCallback(closeCallback);
 
             if (showIdx >= 0)
+            {
                 window.transform.SetSiblingIndex(showIdx);
+            }
             else
+            {
                 window.transform.SetAsLastSibling();
+            }
 
             showingWindowMap[winKey.ID] = window;
 
