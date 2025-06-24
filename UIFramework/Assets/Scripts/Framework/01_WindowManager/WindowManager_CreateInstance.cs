@@ -15,10 +15,10 @@ namespace UIFramework.Window
         private readonly string WINDOW_NAME_TOP_HOLDER = "[WINDOWS_TOP_HOLDER]";
         private readonly string CANVAS_NAME = "[UICanvas]";
 
-        private GameObject m_rootWindow;
-        private GameObject m_holderInactiveWindows;
-        private GameObject m_holderActiveWindows;
-        private GameObject m_holderActiveTopWindows;
+        private GameObject _rootWindow;
+        private GameObject _holderInactiveWindows;
+        private GameObject _holderActiveWindows;
+        private GameObject _holderActiveTopWindows;
         public static void CreateInstance()
         {
             var windowManager = WindowManager.Instance;
@@ -28,12 +28,12 @@ namespace UIFramework.Window
 
         private void CreateRootWindow()
         {
-            if (m_rootWindow != null)
+            if (_rootWindow != null)
                 return;
-            m_rootWindow = new GameObject(WINDOW_NAME_ROOT);
-            m_rootWindow.layer = LayerMask.NameToLayer(CONSTANTS.LAYER_UI);
+            _rootWindow = new GameObject(WINDOW_NAME_ROOT);
+            _rootWindow.layer = LayerMask.NameToLayer(CONSTANTS.LAYER_UI);
 
-            var rootWindowTr = m_rootWindow.transform;
+            var rootWindowTr = _rootWindow.transform;
             rootWindowTr.localPosition = Vector3.zero;
             rootWindowTr.localScale = Vector3.one;
             rootWindowTr.localRotation = Quaternion.identity;
@@ -42,9 +42,9 @@ namespace UIFramework.Window
             Canvas canvas = MakeRootCanvas(rootWindowTr);
             canvas.sortingOrder = 1;
 
-            m_holderInactiveWindows = CreateHolder(WINDOW_NAME_CACHE_ROOT, canvas.transform);
-            m_holderActiveWindows = CreateHolder(WINDOW_NAME_HOLDER, canvas.transform);
-            m_holderActiveTopWindows = CreateHolder(WINDOW_NAME_TOP_HOLDER, canvas.transform);
+            _holderInactiveWindows = CreateHolder(WINDOW_NAME_CACHE_ROOT, canvas.transform);
+            _holderActiveWindows = CreateHolder(WINDOW_NAME_HOLDER, canvas.transform);
+            _holderActiveTopWindows = CreateHolder(WINDOW_NAME_TOP_HOLDER, canvas.transform);
         }
 
         private GameObject CreateHolder(string holderName, Transform parent)

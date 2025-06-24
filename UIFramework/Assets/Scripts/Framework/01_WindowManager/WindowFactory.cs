@@ -8,13 +8,13 @@ namespace UIFramework.Window
 {
     public class WindowFactory
     {
-        private Dictionary<int, WindowBase> m_allCachedWindow = new Dictionary<int, WindowBase>();
-        private WindowManager m_windowManager;
-        private Transform m_holder;
+        private Dictionary<int, WindowBase> _allCachedWindow = new Dictionary<int, WindowBase>();
+        private WindowManager _windowManager;
+        private Transform _holder;
         public WindowFactory(WindowManager windowManager, Transform holder)
         {
-            m_windowManager = windowManager;
-            m_holder = holder;
+            _windowManager = windowManager;
+            _holder = holder;
         }
         public WindowBase CreateWindow(WinKey winKey, Transform parent)
         {
@@ -28,7 +28,7 @@ namespace UIFramework.Window
                 var window = goWindow.GetComponent<WindowBase>();
                 if (window != null)
                 {
-                    window.InitWindow(winKey, m_windowManager);
+                    window.InitWindow(winKey, _windowManager);
                     window.gameObject.SetActive(false);
                     return window;
                 }
@@ -42,24 +42,24 @@ namespace UIFramework.Window
         }
         public void PrecacheWindow(WinKey winKey)
         {
-            if (!m_allCachedWindow.ContainsKey(winKey.ID))
+            if (!_allCachedWindow.ContainsKey(winKey.ID))
             {
-                WindowBase window = CreateWindow(winKey, this.m_holder);
-                m_allCachedWindow[winKey.ID] = window;
+                WindowBase window = CreateWindow(winKey, this._holder);
+                _allCachedWindow[winKey.ID] = window;
             }
         }
 
         public void RemoveCachedWindow(WinKey winKey)
         {
-            if (m_allCachedWindow.ContainsKey(winKey.ID))
+            if (_allCachedWindow.ContainsKey(winKey.ID))
             {
-                GameObject.Destroy(m_allCachedWindow[winKey.ID].gameObject);
-                m_allCachedWindow.Remove(winKey.ID);
+                GameObject.Destroy(_allCachedWindow[winKey.ID].gameObject);
+                _allCachedWindow.Remove(winKey.ID);
             }
         }
         public void RemoveNotShowingWindow(Func<WinKey, bool> isShowing)
         {
-            var windows = m_allCachedWindow.Values;
+            var windows = _allCachedWindow.Values;
             var removeWinKeyIds = new List<int>();
             foreach (var win in windows)
             {
@@ -71,19 +71,19 @@ namespace UIFramework.Window
             }
             for (int i = 0; i < removeWinKeyIds.Count; ++i)
             {
-                m_allCachedWindow.Remove(removeWinKeyIds[i]);
+                _allCachedWindow.Remove(removeWinKeyIds[i]);
             }
         }
 
         public WindowBase RentWindow(WinKey winKey, Transform parent)
         {
-            if (!m_allCachedWindow.TryGetValue(winKey.ID, out var window))
+            if (!_allCachedWindow.TryGetValue(winKey.ID, out var window))
             {
-                window = CreateWindow(winKey, m_holder);
+                window = CreateWindow(winKey, _holder);
             }
             if(window != null)
             {
-                m_allCachedWindow[winKey.ID] = window;
+                _allCachedWindow[winKey.ID] = window;
                 window.transform.SetParent(parent);
             }
 
@@ -93,12 +93,12 @@ namespace UIFramework.Window
         public void ReturnWindow(WindowBase window)
         {
             window.SetCloseCallback(null);
-            window.transform.SetParent(m_holder);
+            window.transform.SetParent(_holder);
         }
 
         public WindowBase GetWindow(WinKey winKey)
         {
-            if (m_allCachedWindow.TryGetValue(winKey.ID, out var window))
+            if (_allCachedWindow.TryGetValue(winKey.ID, out var window))
             {
                 return window;
             }

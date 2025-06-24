@@ -11,20 +11,16 @@ namespace UIFramework.Core
         public ResKey ResourceKey { get; private set; }
         public string PrefabName { get; private set; }
         public int Priority { get; private set; }
-        public string OpenSound { get; private set; }
-        public string CloseSound { get; private set; }
         public bool CanBackKeyClose { get; private set; }
         public bool IsTopWindow { get; private set; }
         public bool IsStartShow { get; private set; }
 
-        public WinKey(int id, ResKey resourceKey, string prefabName, int priority, string openSound, string closeSound, bool canBackKeyClose, bool isTopWindow, bool isStartShow)
+        public WinKey(int id, ResKey resourceKey, string prefabName, int priority, bool canBackKeyClose, bool isTopWindow, bool isStartShow)
         {
             ID = id;
             ResourceKey = resourceKey;
             PrefabName = prefabName;
             Priority = priority;
-            OpenSound = openSound;
-            CloseSound = closeSound;
             CanBackKeyClose = canBackKeyClose;
             IsTopWindow = isTopWindow;
             IsStartShow = isStartShow;
@@ -64,7 +60,7 @@ namespace UIFramework.Core
     public class WinKeyBasic
     {
         public static WinKey MessageBox = new WinKey(1, ResourceKey.BASIC_WINDOW, "MessageBox", 10000,
-            /*OpenSound*/ string.Empty, /*CloseSound*/ string.Empty, /*BackKeyClose*/ false, /*HideDestroy*/ true, /*MostTopWindow*/ true);
+            /*BackKeyClose*/ false, /*HideDestroy*/ true, /*MostTopWindow*/ true);
     }
 
 

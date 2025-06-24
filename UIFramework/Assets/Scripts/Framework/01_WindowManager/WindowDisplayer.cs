@@ -4,31 +4,31 @@ using UnityEngine;
 
 namespace UIFramework.Window
 {
-    public partial class WindowDisplayer : SingletonMonoDontDestroyBehaviour<WindowDisplayer>
+    public class WindowDisplayer : SingletonMonoDontDestroyBehaviour<WindowDisplayer>
     {
-        private Transform m_holder;
-        private Transform m_topHolder;
-        private Dictionary<int, WindowBase> m_showingWindowMap = new Dictionary<int, WindowBase>();
-        private WindowFactory m_windowFactory;
+        private Transform _holder;
+        private Transform _topHolder;
+        private Dictionary<int, WindowBase> _showingWindowMap = new Dictionary<int, WindowBase>();
+        private WindowFactory _windowFactory;
 
         public WindowDisplayer(WindowFactory windowFactory, Transform holder, Transform topHolder)
         {
-            m_windowFactory = windowFactory;
-            m_holder = holder;
-            m_topHolder = topHolder;
+            _windowFactory = windowFactory;
+            _holder = holder;
+            _topHolder = topHolder;
         }
         public WindowBase ShowWindow(WinKey winKey, Callback closeCallback, object openWinParam)
         {
-            var parent = winKey.IsTopWindow ? m_topHolder : m_holder;
-            int showIdx = FindShowingWindowIndex(parent, winKey.Priority);
+            var parent = winKey.IsTopWindow ? _topHolder : _holder;
+            int displayOrder = GetDisplayOrder(parent, winKey.Priority);
             WindowBase showingWindow = FindShowingWindow(winKey);
             if (showingWindow != null)
             {
-                if (showIdx >= 0)
+                if (displayOrder >= 0)
                 {
-                    // 이미 보여지고 있는 ui이기 때문에 본인 index 빼야됨.
-                    showIdx -= 1;
-                    showingWindow.transform.SetSiblingIndex(showIdx);
+                    // 이미 보여지고 있는 ui이기 때문에 본인을 한번 뺀다.
+                    displayOrder -= 1;
+                    showingWindow.transform.SetSiblingIndex(displayOrder);
                 }
                 else
                     showingWindow.transform.SetAsLastSibling();
@@ -36,7 +36,7 @@ namespace UIFramework.Window
             }
 
             
-            WindowBase window = m_windowFactory.RentWindow(winKey, parent);
+            WindowBase window = _windowFactory.RentWindow(winKey, parent);
             if (window == null)
             {
                 GameLogger.LogError($"WindowDisplayer.ShowWindow() : window is null. winKey : {winKey.ID}");
@@ -45,16 +45,16 @@ namespace UIFramework.Window
 
             window.SetCloseCallback(closeCallback);
 
-            if (showIdx >= 0)
+            if (displayOrder >= 0)
             {
-                window.transform.SetSiblingIndex(showIdx);
+                window.transform.SetSiblingIndex(displayOrder);
             }
             else
             {
                 window.transform.SetAsLastSibling();
             }
 
-            m_showingWindowMap[winKey.ID] = window;
+            _showingWindowMap[winKey.ID] = window;
 
             OpenWindow(window, openWinParam);
 
@@ -66,8 +66,8 @@ namespace UIFramework.Window
             if(targetWindow != null)
             {
                 CloseWindow(targetWindow);
-                m_showingWindowMap.Remove(winKey.ID);
-                m_windowFactory.ReturnWindow(targetWindow);
+                _showingWindowMap.Remove(winKey.ID);
+                _windowFactory.ReturnWindow(targetWindow);
             }
         }
 
@@ -84,13 +84,13 @@ namespace UIFramework.Window
         }
         public WindowBase FindShowingWindow(WinKey winKey)
         {
-            if (m_showingWindowMap.TryGetValue(winKey.ID, out var window))
+            if (_showingWindowMap.TryGetValue(winKey.ID, out var window))
             {
                 return window;
             }
             return null;
         }
-        private int FindShowingWindowIndex(Transform parent, int displayPriority)
+        private int GetDisplayOrder(Transform parent, int displayPriority)
         {
             var index = -1;
             for (int i = parent.childCount - 1; i >= 0; --i)
