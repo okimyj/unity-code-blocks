@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using UIFramework.Resource;
+using YJFramework.Resource;
+using YJFramework.Core;
 
-namespace UIFramework.Core
+namespace YJFramework.UI
 {
     public class WinKey : IEquatable<WinKey>
     {

@@ -1,7 +1,7 @@
-using UIFramework.Core;
+using YJFramework.Core;
 using UnityEngine;
 
-namespace UIFramework.Window
+namespace YJFramework.UI
 {
     public partial class WindowManager : SingletonMonoDontDestroyBehaviour<WindowManager>
     {

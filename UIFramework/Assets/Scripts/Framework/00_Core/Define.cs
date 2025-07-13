@@ -1,4 +1,4 @@
-namespace UIFramework.Core
+namespace YJFramework.Core
 {
     public class CONSTANTS
     {

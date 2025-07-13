@@ -1,6 +1,6 @@
 using System;
 
-namespace UIFramework.Resource
+namespace YJFramework.Resource
 {
     #region ResKey
     public class ResKey : IEquatable<ResKey>

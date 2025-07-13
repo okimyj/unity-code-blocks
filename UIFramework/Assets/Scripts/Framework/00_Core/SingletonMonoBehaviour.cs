@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UIFramework.Core
+namespace YJFramework.Core
 {
     public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {

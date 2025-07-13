@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace UIFramework.Core
+namespace YJFramework.Core
 {
     public class GameLogger
     {

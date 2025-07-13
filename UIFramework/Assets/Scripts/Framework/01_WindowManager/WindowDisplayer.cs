@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using UIFramework.Core;
+using YJFramework.Core;
 using UnityEngine;
 
-namespace UIFramework.Window
+namespace YJFramework.UI
 {
     public class WindowDisplayer : SingletonMonoDontDestroyBehaviour<WindowDisplayer>
     {

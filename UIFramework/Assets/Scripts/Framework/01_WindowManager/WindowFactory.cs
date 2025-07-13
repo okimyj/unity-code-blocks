@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using UIFramework.Core;
-using UIFramework.Resource;
+using YJFramework.Core;
+using YJFramework.Resource;
 using UnityEngine;
 
-namespace UIFramework.Window
+namespace YJFramework.UI
 {
     public class WindowFactory
     {

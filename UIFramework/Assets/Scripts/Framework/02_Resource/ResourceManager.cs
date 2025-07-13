@@ -1,7 +1,7 @@
-using UIFramework.Core;
+using YJFramework.Core;
 using UnityEngine;
 
-namespace UIFramework.Resource
+namespace YJFramework.Resource
 {
     public class ResourceManager : SingletonMonoDontDestroyBehaviour<ResourceManager>
     {
