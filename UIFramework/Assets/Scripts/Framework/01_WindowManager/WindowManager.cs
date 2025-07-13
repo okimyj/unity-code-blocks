@@ -1,3 +1,8 @@
+/*
+ * Window 시스템의 진입점이며 전체 생명 주기를 관리하는 클래스
+ * 초기화 및 윈도우 생성, Open, Close 기능 제공
+ * 내부적으로 WindowFactory, WindowDisplayer를 구성하고 호출
+ */
 using YJFramework.Core;
 using UnityEngine;
 
@@ -22,12 +27,10 @@ namespace YJFramework.UI
         {
             return _windowDisplayer.ShowWindow(key, closeCallback, openWinParam);
         }
-
         public void HideWindow(WinKey key)
         {
             _windowDisplayer.HideWindow(key);
         }
-        
         public void PrecacheWindow(WinKey winKey)
         {
             _windowFactory.PrecacheWindow(winKey);

@@ -19,13 +19,13 @@ namespace YJFramework.UI
         private GameObject _holderInactiveWindows;
         private GameObject _holderActiveWindows;
         private GameObject _holderActiveTopWindows;
+
         public static void CreateInstance()
         {
             var windowManager = WindowManager.Instance;
             windowManager.CreateRootWindow();
             windowManager.Initialize();
         }
-
         private void CreateRootWindow()
         {
             if (_rootWindow != null)
@@ -46,7 +46,6 @@ namespace YJFramework.UI
             _holderActiveWindows = CreateHolder(WINDOW_NAME_HOLDER, canvas.transform);
             _holderActiveTopWindows = CreateHolder(WINDOW_NAME_TOP_HOLDER, canvas.transform);
         }
-
         private GameObject CreateHolder(string holderName, Transform parent)
         {
             var go = new GameObject(holderName);

@@ -1,18 +1,14 @@
-
+/*
+ * UI의 RedDot 알림 상태를 통합 관리하는 클래스
+ * 콘텐츠 타입별로 RedDotChecker를 등록하고 상태 갱신
+ * 실시간 동기화를 위해 옵저버 패턴 적용
+ * 팩토리 패턴으로 Checker 객체 생성 (확장, 보수 용이성)
+ */
 using System.Collections.Generic;
 using YJFramework.Core;
 using System;
 namespace YJClient
 {
-    public enum EContentsType
-    {
-        None = 0,
-        Arena,
-        Shop,
-        Hero,
-        Item,
-        Mission
-    }
     public class RedDotManager : SingletonMonoDontDestroyBehaviour<RedDotManager>
     {
         private Dictionary<EContentsType, Func<RedDotCheckerBase>> _checkerFactory = new Dictionary<EContentsType, Func<RedDotCheckerBase>>()

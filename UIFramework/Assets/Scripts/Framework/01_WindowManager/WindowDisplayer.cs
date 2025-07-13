@@ -1,3 +1,10 @@
+/*
+ * Window의 실질적인 표시, 정렬, 닫힘 등을 담당하는 클래스
+ * 현재 활성화된 윈도우 트래킹
+ * 윈도우 계층 정렬 (SiblingIndex 조정)
+ * Open/Close 시 콜백 호출 및 상태 처리
+ * WindowFactory를 통해 윈도우 인스턴스 요청
+ */
 using System.Collections.Generic;
 using YJFramework.Core;
 using UnityEngine;
@@ -70,7 +77,6 @@ namespace YJFramework.UI
                 _windowFactory.ReturnWindow(targetWindow);
             }
         }
-
         private void OpenWindow(WindowBase window, object openWinParam)
         {
             window.gameObject.SetActive(true);
@@ -82,7 +88,7 @@ namespace YJFramework.UI
             window.OnCloseWindow();
             window.gameObject.SetActive(false);
         }
-        public WindowBase FindShowingWindow(WinKey winKey)
+        private WindowBase FindShowingWindow(WinKey winKey)
         {
             if (_showingWindowMap.TryGetValue(winKey.ID, out var window))
             {

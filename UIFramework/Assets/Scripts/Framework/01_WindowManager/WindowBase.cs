@@ -15,7 +15,6 @@ namespace YJFramework.UI
         }
         public virtual void OnOpenWindow(object openWinParam) { }
         public virtual void OnCloseWindow() { }
-
         public void SetCloseCallback(Callback callback)
         {
             _closeCallback = callback;
@@ -25,7 +24,6 @@ namespace YJFramework.UI
             _closeCallback?.Invoke();
             _closeCallback = null;
         }
-
         protected void Close()
         {
             _windowManager.HideWindow(WinKey);

@@ -1,3 +1,9 @@
+/*
+ * 윈도우 인스턴스를 생성/재사용/파기 하는 클래스
+ * 프리팹 로드 및 WindowBase 생성 
+ * 비활성 윈도우 캐시(_allCachedWindow)를 통해 생성한 객체 재사용
+ * 메모리 최적화를 위한 반환 및 제거 기능 제공
+ */
 using System;
 using System.Collections.Generic;
 using YJFramework.Core;
@@ -48,7 +54,34 @@ namespace YJFramework.UI
                 _allCachedWindow[winKey.ID] = window;
             }
         }
+        public WindowBase RentWindow(WinKey winKey, Transform parent)
+        {
+            if (!_allCachedWindow.TryGetValue(winKey.ID, out var window))
+            {
+                window = CreateWindow(winKey, _holder);
+            }
+            if(window != null)
+            {
+                _allCachedWindow[winKey.ID] = window;
+                window.transform.SetParent(parent);
+            }
 
+            return window;
+        }
+        public void ReturnWindow(WindowBase window)
+        {
+            window.SetCloseCallback(null);
+            window.transform.SetParent(_holder);
+        }
+        public WindowBase GetWindow(WinKey winKey)
+        {
+            if (_allCachedWindow.TryGetValue(winKey.ID, out var window))
+            {
+                return window;
+            }
+            return null;
+        }
+        #region Destory
         public void RemoveCachedWindow(WinKey winKey)
         {
             if (_allCachedWindow.ContainsKey(winKey.ID))
@@ -74,35 +107,6 @@ namespace YJFramework.UI
                 _allCachedWindow.Remove(removeWinKeyIds[i]);
             }
         }
-
-        public WindowBase RentWindow(WinKey winKey, Transform parent)
-        {
-            if (!_allCachedWindow.TryGetValue(winKey.ID, out var window))
-            {
-                window = CreateWindow(winKey, _holder);
-            }
-            if(window != null)
-            {
-                _allCachedWindow[winKey.ID] = window;
-                window.transform.SetParent(parent);
-            }
-
-            return window;
-        }
-
-        public void ReturnWindow(WindowBase window)
-        {
-            window.SetCloseCallback(null);
-            window.transform.SetParent(_holder);
-        }
-
-        public WindowBase GetWindow(WinKey winKey)
-        {
-            if (_allCachedWindow.TryGetValue(winKey.ID, out var window))
-            {
-                return window;
-            }
-            return null;
-        }
+        #endregion
     }
 }
